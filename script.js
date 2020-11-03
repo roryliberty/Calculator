@@ -31,6 +31,15 @@ function handleOperator(newOperator) {
     calculator.operator = newOperator;
 }
 
+function calculate(firstNum, secondNum, operator) {
+    if (operator === '+') {
+        return firstNum + secondNum;
+    }   else if (operator === '-') {
+        return firstNum - secondNum;
+    }
+
+}
+
 function clearCalc() {
     calculator.displayValue = '0';
     calculator.firstNum = null;
@@ -48,8 +57,8 @@ keys.addEventListener('click', (e) => {
     if (target.classList.contains('operator')) {
         handleOperator(target.value);
         updateDisplay();
-        console.log(calculator.firstNum);
-        console.log(calculator.operator);
+                                                console.log(calculator.firstNum);
+                                                console.log(calculator.operator);
         return;
     }
 

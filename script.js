@@ -9,13 +9,19 @@ const keys = document.querySelector(".buttons");
 
 function updateDisplay() {
     const display = document.querySelector('.screen');
+
+    if (calculator.displayValue === '0') {
+        calculator.displayValue = '';
+    }
+    
     display.value = calculator.displayValue;
 }
 
 function inputDigit(digit) {
-    if (calculator.displayValue === '0') {
+    if (calculator.waitingForSecondNum === true) {
         calculator.displayValue = digit;
-    } else {
+        calculator.waitingForSecondNum = false;
+    }   else {
         calculator.displayValue = calculator.displayValue + digit;
     }
 }
@@ -25,10 +31,13 @@ function handleOperator(newOperator) {
 
     if (calculator.firstNum === 'null' && !isNaN(inputValue)) {
         calculator.firstNum = inputValue;
+    }   else if (calculator.operator) {
+        const result = calculate(calculator.firstNum, inputValue, calculator.operator);
     }
 
     calculator.waitingForSecondNum = true;
     calculator.operator = newOperator;
+    console.log(calculator);
 }
 
 function calculate(firstNum, secondNum, operator) {
@@ -36,8 +45,13 @@ function calculate(firstNum, secondNum, operator) {
         return firstNum + secondNum;
     }   else if (operator === '-') {
         return firstNum - secondNum;
+    }   else if (operator === 'x') {
+        return firstNum * secondNum;
+    }   else if (operator === '/') {
+        return firstNum / secondNum;
     }
 
+    return secondNum;
 }
 
 function clearCalc() {
@@ -57,8 +71,8 @@ keys.addEventListener('click', (e) => {
     if (target.classList.contains('operator')) {
         handleOperator(target.value);
         updateDisplay();
-                                                console.log(calculator.firstNum);
-                                                console.log(calculator.operator);
+        console.log(calculator.firstNum);
+        console.log(calculator.operator);
         return;
     }
 
@@ -71,5 +85,9 @@ keys.addEventListener('click', (e) => {
     if (target.classList.contains('clear-btn')) {
         clearCalc();
         updateDisplay();
+    }
+
+    if (target.classList.contains('equals-btn')) {
+
     }
 });

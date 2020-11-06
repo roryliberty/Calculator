@@ -13,11 +13,14 @@ function updateDisplay() {
 }
 
 function inputDigit(digit) {
-    if (calculator.displayValue === '0') {
-        calculator.displayValue = digit;
-    } else {
-        calculator.displayValue = calculator.displayValue + digit;
-    }
+	const { displayValue } = calculator;
+	calculator.displayValue = displayValue === '0' ? digit : displayValue + digit;
+
+//    if (calculator.displayValue === '0') {
+//        calculator.displayValue = digit;
+//    } else {
+//        calculator.displayValue = calculator.displayValue + //digit;
+//    }
 }
 
 function handleOperator(newOperator) {

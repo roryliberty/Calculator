@@ -18,12 +18,23 @@ function updateDisplay() {
 }
 
 function inputDigit(digit) {
+<<<<<<< HEAD
     if (calculator.waitingForSecondNum === true) {
         calculator.displayValue = digit;
         calculator.waitingForSecondNum = false;
     }   else {
         calculator.displayValue = calculator.displayValue + digit;
     }
+=======
+	const { displayValue } = calculator;
+	calculator.displayValue = displayValue === '0' ? digit : displayValue + digit;
+
+//    if (calculator.displayValue === '0') {
+//        calculator.displayValue = digit;
+//    } else {
+//        calculator.displayValue = calculator.displayValue + //digit;
+//    }
+>>>>>>> f593f78af20af2795a142e5c6220664333d6aee5
 }
 
 function handleOperator(newOperator) {
